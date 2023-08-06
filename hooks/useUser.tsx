@@ -31,8 +31,10 @@ export const MyUserContextProvider = (props: Props) => {
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const [subscription, setSubscription] = useState<Subscription | null>(null);
 
+  // NOTE: RLS enabled. Can view own user data.
   const getUserDetails = () => supabase.from('users').select('*').single();
   const getSubscription = () =>
+  // NOTE: RLS enabled. Can only view own subs data.
     supabase
       .from('subscriptions')
       .select('*, prices(*, products(*))')
